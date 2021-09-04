@@ -1,31 +1,289 @@
 /* add css module styles here (optional) */
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+code {
+  font-family: source-code-pro,Menlo,Monaco,Consolas,'Courier New',monospace
+}
+
+.card,.form-control {
+  opacity: 1
+}
+
+.card {
+  background: #fff;
+  box-shadow: 0 30px 60px 0 rgb(90 116 148/40%),rgb(210 210 249) 4px 4px 0 0;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 1rem;
+  font-family: 'Courier New',Courier,monospace
+}
+
+img {
+  padding-bottom: 1rem;
+  width: 80%;
+  padding-top: .5rem;
+  opacity: .88;
+}
+
 .AlgoButton {
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 25px;
-    font-weight: 600;
-    margin: 4px 2px;
-    cursor: pointer;
-    background-color: blue;
-    border-radius: 6px;
+  background-color: #ffffff00;
+  height: 3rem;
+  color: #333;
+  border: 1px solid #333;
+  border-radius: 6px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 400
+}
+
+.form-label,AlgoButton,AlgoSendButton {
+  display: flex;
+  align-items: center;
+  font-family: sans-serif
+}
+
+.AlgoSendButton {
+  background-color: #1c1ce1;
+  color: #fff!important;
+  display: inline-block;
+  white-space: pre-wrap;
+  padding: .5rem .75rem;
+  text-align: center;
+  text-decoration: none;
+  height: 3rem;
+  border: 1px solid #333;
+  border-radius: 6px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 700
+}
+
+.AlgoButton:hover {
+  color: #1c1ce1;
+  border: 1px solid #1c1ce1;
+  box-shadow: rgb(210 210 249) 4px 4px 0 0
+}
+
+.AlgoButton:active {
+  background-color: #e5e5e5
+}
+
+.card h3 {
+  position: relative;
+  min-height: .8em;
+  background: #f8f8f9;
+  padding: .8em 1.2em;
+  line-height: 1.4285em;
+  color: rgba(0,0,0,.8);
+  transition: opacity .1s ease,color .1s ease,background .1s ease,box-shadow .1s ease;
+  border-radius: .28571429rem;
+  margin-bottom: 0;
+  overflow-wrap: break-word!important;
+  flex-flow: wrap;
+  white-space: normal;
+  box-shadow: inset 0 0 0 1px rgb(34 36 38/22%),0 0 0 0 transparent;
+  font-family: source-code-pro,Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-size: small;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: .5rem
+}
+
+.form-label {
+  opacity: 1;
+  padding: .8rem;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: smaller
+}
+
+@media (max-width:550px) {
+  .form-label {
+      opacity: 1;
+      display: flex;
+      padding: .8rem;
+      padding-left: 0;
+      padding-right: 0;
+      font-size: smaller;
+      font-family: sans-serif;
+      flex-direction: column;
+      align-content: stretch;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start
   }
-  
-  .AlgoSendButton {
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 25px;
-    font-weight: 600;
-    margin: 4px 2px;
-    cursor: pointer;
-    background-color: red;
-    border-radius: 6px;
+
+  .form-control {
+      display: block;
+      width: 100%;
+      height: calc(1.5em + .75rem + 2px);
+      font-size: 1rem;
+      font-weight: 400;
+      padding-left: 0!important;
+      margin-left: 0!important;
+      margin-top: .2rem;
+      text-indent: .3rem;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #f8f8f9;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      font-family: monospace
   }
+
+  div#root {
+      background-color: #f4f4f4;
+      height: 100vh;
+      padding: 3vh!important
+  }
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + .75rem + 2px);
+  font-size: 1rem;
+  font-weight: 400;
+  margin-left: 1rem;
+  text-indent: .3rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #f8f8f9;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  font-family: monospace
+}
+
+br {
+  display: none!important
+}
+
+input.form-control:hover {
+  background-color: #fff
+}
+
+input.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #1c1ce1;
+  box-shadow: rgb(210 210 249) 4px 4px 0 0;
+  outline: 0
+}
+
+.AlgoSendButton:active {
+  background-color: #1616b4 !important
+}
+
+.AlgoSendButton:hover {
+  background-color: rgba(28,28,225,.8);
+  box-shadow: rgb(210 210 249) 4px 4px 0 0
+}
+
+div#root,html {
+  background-color: #f4f4f4
+}
+
+div#root {
+  height: 100vh;
+  padding: 7vh
+}
+
+ /* The switch - the box around the slider */
+ .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
