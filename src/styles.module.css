@@ -1,5 +1,11 @@
 /* add css module styles here (optional) */
 
+@media (max-width: 550px){
+  .row {
+    font-size: x-small;
+}
+}
+
 .row {
     display: flex;
     flex-direction: row;
