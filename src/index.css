@@ -6,6 +6,12 @@ body {
   -moz-osx-font-smoothing: grayscale
 }
 
+@media (max-width: 550px){
+  .row {
+    font-size: x-small;
+}
+}
+
 .row {
     display: flex;
     flex-direction: row;
