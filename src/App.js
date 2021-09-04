@@ -53,7 +53,7 @@ class App extends Component {
 
   render() {
     return <div align="center" class="card"><img alt="Pipeline Express" src={logo} width="300"></img><br></br>
-<div style={{backgroundColor: "red", color: "white"}}><h1>Warning: HIGHLY experimental!!! Glitches probable!!!!</h1></div>
+<div class="warning" style={{backgroundColor: "red", color: "white"}}><h1>Warning: HIGHLY experimental!!! Glitches probable!!!!</h1></div>
       <AlgoButton wallet={myAlgoWallet} context={this} returnTo={"myAddress"} /><div class="row"><p />myAlgo Wallet
       <label class="switch">
         <input type="checkbox" onChange={this.switch}/>
