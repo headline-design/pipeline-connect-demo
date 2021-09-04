@@ -54,11 +54,11 @@ class App extends Component {
   render() {
     return <div align="center" class="card"><img alt="Pipeline Express" src={logo} width="300"></img><br></br>
 <div style={{backgroundColor: "red", color: "white"}}><h1>Warning: HIGHLY experimental!!! Glitches probable!!!!</h1></div>
-      <AlgoButton wallet={myAlgoWallet} context={this} returnTo={"myAddress"} /><p />myAlgo Wallet
+      <AlgoButton wallet={myAlgoWallet} context={this} returnTo={"myAddress"} /><div class="row"><p />myAlgo Wallet
       <label class="switch">
         <input type="checkbox" onChange={this.switch}/>
         <span class ="slider round"></span>
-      </label>WalletConnect<p></p>
+      </label>WalletConnect<p></p></div>
       <label>
         MainNet:
         <input
