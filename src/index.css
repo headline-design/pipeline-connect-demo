@@ -6,31 +6,6 @@ body {
   -moz-osx-font-smoothing: grayscale
 }
 
-@media (max-width: 550px){
-  .row {
-    font-size: x-small;
-}
-}
-
-.row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: inset 0 0 0 1px rgb(34 36 38 / 22%), 0 0 0 0 transparent;
-    background: #f8f8f9;
-    padding: .8em 1.2em;
-    line-height: 1.4285em;
-    color: rgba(0,0,0,.8);
-    border-radius: .28571429rem;
-    font-family: source-code-pro,Menlo,Monaco,Consolas,"Courier New",monospace;
-    font-size: small;
-    font-weight: 400;
-    text-align: left;
-    margin-bottom: .5rem;
-}
-
 code {
   font-family: source-code-pro,Menlo,Monaco,Consolas,'Courier New',monospace
 }
@@ -140,6 +115,28 @@ button._1E3Mb:active {
   box-shadow: inset 0 0 0 1px rgb(34 36 38/22%),0 0 0 0 transparent;
   font-family: source-code-pro,Menlo,Monaco,Consolas,"Courier New",monospace;
   font-size: small;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: .5rem
+}
+
+
+.card h2 {
+  position: relative;
+  min-height: .8em;
+  background: #ff0000;
+  padding: .8em 1.2em;
+  line-height: 1.4285em;
+  color: rgba(255, 255, 255, 1);
+  transition: opacity .1s ease,color .1s ease,background .1s ease,box-shadow .1s ease;
+  border-radius: .28571429rem;
+  margin-bottom: 0;
+  overflow-wrap: break-word!important;
+  flex-flow: wrap;
+  white-space: normal;
+  box-shadow: inset 0 0 0 1px rgb(34 36 38/22%),0 0 0 0 transparent;
+  font-family: source-code-pro,Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-size: medium;
   font-weight: 400;
   text-align: left;
   margin-bottom: .5rem

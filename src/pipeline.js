@@ -3,12 +3,15 @@ import styles from './styles.module.css'
 import MyAlgo from '@randlabs/myalgo-connect'
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "algorand-walletconnect-qrcode-modal";
-import algosdk from "algosdk";
 import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
+import { encode, decode } from "algo-msgpack-with-bigint";
+import base32 from 'hi-base32';
+
 
 export class Pipeline {
 
     static init() {
+        this.index = 0;
         this.pipeConnector = "myAlgoWallet";
         this.main = true;
         this.address = "";
@@ -59,30 +62,32 @@ export class Pipeline {
         }
 
         else {
-            if (!this.connector.connected) {
-                // create new session
-                this.connector.on("connect", (error, payload) => {
-                    if (error) {
-                        throw error;
-                    }
-                    this.address = payload.params[0].accounts[0];
+
+            this.connector.on("connect", (error, payload) => {
+                if (error) {
+                    throw error;
                 }
-                );
+                this.address = payload.params[0].accounts[0];
+            }
+            );
 
-                this.connector.on("session_update", (error, payload) => {
-                    alert(error + payload)
-                    if (error) {
-                        throw error;
-                    }
-                    // Get updated accounts 
+            this.connector.on("session_update", (error, payload) => {
+                alert(error + payload)
+                if (error) {
+                    throw error;
+                }
+                // Get updated accounts 
 
-                });
+            });
 
-                this.connector.createSession();
-               
+            if (!this.connector.connected) {
+
+                await this.connector.createSession();
+
             }
             else {
-                this.connector.killSession();
+                await this.connector.killSession();
+                await this.connector.createSession();
             }
         }
     }
@@ -96,24 +101,51 @@ export class Pipeline {
             lastRound: mytxnb.lastRound,
             genesisID: mytxnb.genesisID,
             genesisHash: mytxnb.genesisHash,
-          }
-          console.log("my transaction")
-          console.log(mytxnb)
+        }
 
-        const mytxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
-            from: this.address,
-            to: mytxnb.to,
-            amount: mytxnb.amount,
-            note: mytxnb.note,
-            suggestedParams
-          });
+        let prototxn = {
+            "amt": mytxnb.amount,
+            "fee": 1000,
+            "fv": mytxnb.lastRound - 1000,
+            "gen": mytxnb.genesisID,
+            "gh": new Uint8Array(Buffer.from(mytxnb.genesisHash, 'base64')),
+            "lv": mytxnb.lastRound,
+            "note": mytxnb.note,
+            "rcv": new Uint8Array(base32.decode.asBytes(mytxnb.to).slice(0, 32)),
+            "snd": new Uint8Array(base32.decode.asBytes(this.address).slice(0, 32)),
+            "type": "pay"
+        }
 
+        let prototxnASA = {};
+        let prototxnb = encode(prototxn);
         let txns = [];
-        txns[0] = mytxn;
+        txns[0] = prototxnb;
+
+        if (this.index !== 0) {
+            prototxnASA = {
+                "aamt": mytxnb.amount,
+                "arcv": new Uint8Array(base32.decode.asBytes(mytxnb.to).slice(0, 32)),
+                "fee": 1000,
+                "fv": mytxnb.lastRound - 1000,
+                "gen": mytxnb.genesisID,
+                "gh": new Uint8Array(Buffer.from(mytxnb.genesisHash, 'base64')),
+                "lv": mytxnb.lastRound,
+                "note": mytxnb.note,
+                "snd": new Uint8Array(base32.decode.asBytes(this.address).slice(0, 32)),
+                "type": "axfer",
+                "xaid": parseInt(mytxnb.assetIndex)
+            }
+            prototxnb = encode(prototxnASA);
+            txns[0] = prototxnb;
+        }
+
+        console.log(prototxnb)
+        console.log(new TextDecoder().decode(prototxnb))
+        console.log(JSON.stringify(decode(prototxnb)))
+
         // Sign transaction
-        // txns is an array of algosdk.Transaction
         const txnsToSign = txns.map(txnb => {
-            const encodedTxn = Buffer.from(algosdk.encodeUnsignedTransaction(txnb)).toString("base64");
+            const encodedTxn = Buffer.from(txnb).toString("base64");
 
             return {
                 txn: encodedTxn,
@@ -128,15 +160,15 @@ export class Pipeline {
 
         var request = formatJsonRpcRequest("algo_signTxn", requestParams);
 
-        request.id = 1630701955126956;
+        request.id = this.connector._handshakeId;
 
         console.log(request);
 
         try {
             const result = await this.connector.sendCustomRequest(request);
             const signedPartialTxn = result[0]
-                const rawSignedTxn = Buffer.from(signedPartialTxn, "base64");
-                return new Uint8Array(rawSignedTxn);
+            const rawSignedTxn = Buffer.from(signedPartialTxn, "base64");
+            return new Uint8Array(rawSignedTxn);
         }
         catch (error) { console.log(error) }
     }
@@ -183,13 +215,15 @@ export class Pipeline {
             }
 
             if (index !== 0) {
+                this.index = index;
                 txn.type = 'axfer'
                 txn.assetIndex = parseInt(index)
+
             }
 
             if (this.main == false) {
-                txn.genesisID = 'testnet-v1.0'
-                txn.genesisHash = 'SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI='
+                txn.genesisID = 'testnet-v1.0';
+                txn.genesisHash = 'SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=';
             }
 
             let signedTxn = {};

@@ -53,12 +53,12 @@ class App extends Component {
 
   render() {
     return <div align="center" class="card"><img alt="Pipeline Express" src={logo} width="300"></img><br></br>
-<div class="warning" style={{backgroundColor: "red", color: "white"}}><h1>Warning: HIGHLY experimental!!! Glitches probable!!!!</h1></div>
-      <AlgoButton wallet={myAlgoWallet} context={this} returnTo={"myAddress"} /><div class="row"><p />myAlgo Wallet
+<div style={{backgroundColor: "red", color: "white"}}><h2>Warning: If WalletConnect experiences connection issues, try reloading this page and/or removing previous sessions via your mobile Algorand wallet app.</h2></div>
+      <AlgoButton wallet={myAlgoWallet} context={this} returnTo={"myAddress"} /><p />myAlgo Wallet
       <label class="switch">
         <input type="checkbox" onChange={this.switch}/>
         <span class ="slider round"></span>
-      </label>WalletConnect<p></p></div>
+      </label>WalletConnect<p></p>
       <label>
         MainNet:
         <input
