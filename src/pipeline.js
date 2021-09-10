@@ -63,7 +63,7 @@ export class Pipeline {
 
         else {
 
-            this.connector.on("connect", (error, payload) => {
+          this.connector.on("connect", (error, payload) => {
                 if (error) {
                     throw error;
                 }
@@ -90,6 +90,16 @@ export class Pipeline {
                 await this.connector.createSession();
             }
         }
+
+        const getAddress = new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(this.connector.accounts[0]);
+            }, 10000);
+          });
+    
+
+            const address = await getAddress;
+            return address;
     }
 
     static async walletConnectSign(mytxnb) {

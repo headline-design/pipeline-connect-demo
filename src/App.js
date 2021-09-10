@@ -47,8 +47,9 @@ class App extends Component {
     )
   }
 
-  componentDidMount() {
+  /*componentDidMount() {
     this.interval = setInterval(() => this.setState({myAddress: Pipeline.address}), 1000);}
+    */
 
 
   render() {
